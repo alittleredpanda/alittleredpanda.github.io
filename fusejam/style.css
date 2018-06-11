@@ -1,0 +1,67 @@
+body{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.hidden{
+  display: none;
+}
+
+.textbox{
+  text-align:center;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15%;
+  font-size: 20pt;
+}
+.normal{
+
+}
+.action{
+  color: #e74c3c;
+}
+
+.describe{
+  color: #2e86c1;
+}
+
+.observe{
+  color: #17a589;
+}
+
+button{
+  font-family: 'Montserrat', sans-serif;
+  padding: 20px;
+  font-size: 20pt;
+  border-radius: 20px;
+  border: 5px solid #fff;
+  margin: 20px;
+  width: 250px;
+}
+button:hover{
+  cursor: pointer;
+}
+
+#audiobutton{
+  background: #f0b27a;
+  border-color:  #d35400;
+  width: 200px;
+}
+#button1{
+  background: #f1948a;
+  border-color: #e74c3c;
+}
+#button2{
+  background: #aed6f1;
+  border-color: #2e86c1 ;
+}
+#button3{
+  background:  #a9dfbf;
+  border-color:  #17a589;
+}
+
+#backbutton{
+  margin-top: 20px;
+  background:  #e8e847;
+  border-color:  #d8d811;
+}

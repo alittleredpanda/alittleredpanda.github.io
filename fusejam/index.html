@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<link href="style.css" rel="stylesheet">
+<script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" red="stylesheet">
+</head>
+
+<body>
+
+
+  <div id="text01" class="textbox">
+    <p id="text">Welcome to earth</p>
+    <button id="audiobutton"><i class="fa fa-volume-up" aria-hidden="true"></i>
+  </button>
+    <br>
+    <button id="button1" class="gamebutton"></button>
+    <button id="button2" class="gamebutton"></button>
+    <button id="button3" class="gamebutton"></button>
+
+    <button id="backbutton">go back</button>
+  </div>
+
+
+<script>
+var textArray = [
+                  ["Welcome! If you have activated this device it is likely that on the way to your destination you have encountered a malfunction placing you in the wrong time zone. <p> DONT PANIC <p> Press the button below to begin", "normal",
+                    true, "continue", 1,
+                    false, "", 10,
+                    false, "", 10,
+                    true],
+
+                  [" ", "normal",
+                    true, "continue", 2,
+                    false, "", 10,
+                    false, "", 10,
+                    false],
+
+                  ["What do you observe here?", "observe",
+                    true, "continue", 3,
+                    false, "choice two", 3,
+                    false, "choice three", 3,
+                    false],
+
+                  ["What is that in the sky?", "describe",
+                    true, "The Moon", 4,
+                    true, "A Face", 4,
+                    true, "The Sun", 4,
+                    false],
+
+                  ["Perform an action here", "action",
+                    true, "continue", 1,
+                    false, "", 10,
+                    false, "", 10,
+                    false],
+                ];
+var locationArray = [   "First task, water is needed for The Locals&#39;  survival. Try and find some",
+                        "Next we need some sustenance, find something you can eat"
+                    ];
+var locationVar = 0;
+
+var describeArray = [ ["What do the locals do all day?", "Dance", "Cry", "Walk"],
+                      ["What is that in the sky", "The Moon", "A Face", "The Sun"],
+                      ["How well can you breathe?", "Clearly", "The air is unpleasant", "Badly"],
+                      ["What can you hear? ", "Music", "Nature", "Other People"]
+                  ];
+var describeVar = 0;
+
+var textVar = 0;
+var textVarArray = [0];
+
+var audio = [];
+
+audio[0]=new Audio();
+audio[0].src="http://alittleredpanda.com/fusejam/OPTIMISM.wav";
+
+$(document).ready(function(){
+
+  setValues ();
+
+   $(this).on('keypress',function(event) {
+
+
+     	if (event.key  == "a") {
+        nextPage();
+			}
+			if (event.key == "s") {
+        nextPage();
+			}
+       if (event.key == "d") {
+        nextPage();
+      }
+
+       if(event.key == "w"){
+         backButton();
+      }
+
+       if(event.key == "f"){
+        audio[textVar].play();
+      }
+		});
+
+  $("button").on("click", function(){
+      if($(this).is("#audiobutton")){
+        audio[textVar].play();
+      }
+      if($(this).hasClass("gamebutton")){
+        nextPage();
+      }
+      if($(this).is("#backbutton")){
+          backButton();
+      }
+  });
+});
+
+ function setValues(){
+   // $("#array").html(textVarArray);
+
+   if (textVar == 1){
+     $("#text").html(locationArray[locationVar]);
+      locationVar ++;
+   }else if (textVar == 3){
+     $("#text").html(describeArray[describeVar][0]);
+   }else{
+  $("#text").html(textArray[textVar][0]);
+   }
+
+   if (textVar == 3){
+      $("#button1").html(describeArray[describeVar][1]);
+      $("#button2").show().html(describeArray[describeVar][2]);
+      $("#button3").show().html(describeArray[describeVar][3]);
+      describeVar ++;
+   } else{
+     $("#button1").html(textArray[textVar][3])
+     $("#button2").hide();
+     $("#button3").hide();
+   }
+
+    if (textArray[textVar][11] == true){
+     $("#audiobutton").show();
+   }else{
+     $("#audiobutton").hide();
+   }
+}
+
+function nextPage(){
+        textVarArray.push(textArray[textVar][4]);
+    	  textVar = textArray[textVar][4];
+        setValues ();
+}
+
+function backButton(){
+          if (textVar == 1 || textVar == 2){
+          locationVar --;
+        }
+        if (textVar == 3){
+          describeVar --;
+        }
+        textVar = textVarArray[textVarArray.length-2];
+        textVarArray.splice(-1,1);
+        setValues ();
+}
+
+
+
+
+
+</script>
+</body>
